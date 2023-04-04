@@ -1,0 +1,25 @@
+{
+  "name": "js-prjctr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rieznik/js-prjctr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rieznik/js-prjctr/issues"
+  },
+  "homepage": "https://github.com/rieznik/js-prjctr#readme",
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.7.0",
+    "prettier": "^2.8.4"
+  }
+}
