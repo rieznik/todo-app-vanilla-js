@@ -3,8 +3,9 @@ const listElement = document.querySelector('#list');
 export const renderList = (tasksList) => {
   listElement.innerHTML = '';
 
-  tasksList.forEach((task, index) => {
+  tasksList.forEach((task) => {
     const taskElement = document.createElement('li');
+    taskElement.setAttribute('id', task.id);
     if (task.completed) taskElement.classList.add('completed');
 
     taskElement.innerHTML = `
@@ -17,7 +18,7 @@ export const renderList = (tasksList) => {
             <i class="input-helper"></i>
           </label>
         </div>
-        <a class="remove mdi mdi-close-circle-outline" data-index="${index}"></a>
+        <a class="remove mdi mdi-close-circle-outline"></a>
     `;
     listElement.append(taskElement);
   });

@@ -2,8 +2,10 @@ const list = document.querySelector('#list');
 
 export const listClickListener = (cb) => {
   list.addEventListener('click', (event) => {
-    if ('index' in event.target.dataset) {
-      cb(Number(event.target.dataset.index));
+    const id = Number(event.target.closest('li').id);
+
+    if (event.target.classList.contains('remove')) {
+      cb(id, 'remove');
     }
   });
 };

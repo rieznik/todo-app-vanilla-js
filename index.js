@@ -26,6 +26,7 @@ const startApp = () => {
 
   formListener((newTask) => {
     tasksList.push({
+      id: new Date().getTime(),
       name: newTask,
       completed: false,
     });
@@ -33,10 +34,11 @@ const startApp = () => {
     renderList(tasksList);
   });
 
-  listClickListener((index) => {
-    tasksList.splice(index, 1);
-    saveList(tasksList);
-    renderList(tasksList);
+  listClickListener((id, action) => {
+    if (action === 'remove') {
+      saveList(tasksList.filter((task) => task.id !== id));
+      renderList(tasksList.filter((task) => task.id !== id));
+    }
   });
 
   formChangeListener((text) => {
