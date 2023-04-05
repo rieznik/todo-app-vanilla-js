@@ -3,6 +3,7 @@ import { formListener } from './js/formListener.js';
 import { saveList, loadList } from './js/ls.js';
 import { listClickListener } from './js/listClickListener.js';
 import { formChangeListener } from './js/formChangeListener.js';
+import { removeCompletedListener } from './js/removeCompletedListener.js';
 import { byName } from './js/filters.js';
 
 // Done ✅
@@ -11,16 +12,17 @@ import { byName } from './js/filters.js';
 // by pressing enter
 // Delete a task
 // Search tasks by name
+// Mark a task as completed
 
 // TODO 🔲
-// Mark a task as completed (1/2)
+
 // Delete all completed tasks
 // Filter tasks by completed and uncompleted (different lists)
 
 // Save data to localStorage
 
 const startApp = () => {
-  const tasksList = loadList();
+  let tasksList = loadList();
 
   renderList(tasksList);
 
@@ -40,10 +42,7 @@ const startApp = () => {
 
   listClickListener((id, action) => {
     if (action === 'remove') {
-      tasksList.splice(
-        tasksList.findIndex((task) => task.id !== id),
-        1
-      );
+      tasksList = tasksList.filter((task) => task.id !== id);
       updateList();
     }
 
@@ -57,6 +56,11 @@ const startApp = () => {
   formChangeListener((text) => {
     const filteredTasks = tasksList.filter(byName(text));
     renderList(filteredTasks);
+  });
+
+  removeCompletedListener(() => {
+    tasksList = tasksList.filter((task) => !task.completed);
+    updateList();
   });
 };
 
