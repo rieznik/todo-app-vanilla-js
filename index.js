@@ -24,20 +24,33 @@ const startApp = () => {
 
   renderList(tasksList);
 
+  const updateList = () => {
+    saveList(tasksList);
+    renderList(tasksList);
+  };
+
   formListener((newTask) => {
     tasksList.push({
       id: new Date().getTime(),
       name: newTask,
       completed: false,
     });
-    saveList(tasksList);
-    renderList(tasksList);
+    updateList(tasksList);
   });
 
   listClickListener((id, action) => {
     if (action === 'remove') {
-      saveList(tasksList.filter((task) => task.id !== id));
-      renderList(tasksList.filter((task) => task.id !== id));
+      tasksList.splice(
+        tasksList.findIndex((task) => task.id !== id),
+        1
+      );
+      updateList();
+    }
+
+    if (action === 'check') {
+      const clickedTask = tasksList.find((task) => task.id === id);
+      clickedTask.completed = !clickedTask.completed;
+      updateList();
     }
   });
 

@@ -7,5 +7,9 @@ export const listClickListener = (cb) => {
     if (event.target.classList.contains('remove')) {
       cb(id, 'remove');
     }
+
+    if (event.target.classList.contains('checkbox')) {
+      cb(id, 'check');
+    }
   });
 };
