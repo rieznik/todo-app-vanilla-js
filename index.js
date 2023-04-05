@@ -6,29 +6,14 @@ import { formChangeListener } from './js/formChangeListener.js';
 import { removeCompletedListener } from './js/removeCompletedListener.js';
 import { byName } from './js/filters.js';
 
-// Done ✅
-// Create a new task
-// by clicking on the button
-// by pressing enter
-// Delete a task
-// Search tasks by name
-// Mark a task as completed
-
-// TODO 🔲
-
-// Delete all completed tasks
-// Filter tasks by completed and uncompleted (different lists)
-
-// Save data to localStorage
-
 const startApp = () => {
-  let tasksList = loadList();
+  const tasksList = loadList();
 
   renderList(tasksList);
 
-  const updateList = () => {
-    saveList(tasksList);
-    renderList(tasksList);
+  const updateList = (list) => {
+    saveList(list);
+    renderList(list);
   };
 
   formListener((newTask) => {
@@ -42,14 +27,14 @@ const startApp = () => {
 
   listClickListener((id, action) => {
     if (action === 'remove') {
-      tasksList = tasksList.filter((task) => task.id !== id);
-      updateList();
+      const filteredTasksList = tasksList.filter((task) => task.id !== id);
+      updateList(filteredTasksList);
     }
 
     if (action === 'check') {
       const clickedTask = tasksList.find((task) => task.id === id);
       clickedTask.completed = !clickedTask.completed;
-      updateList();
+      updateList(tasksList);
     }
   });
 
@@ -59,8 +44,8 @@ const startApp = () => {
   });
 
   removeCompletedListener(() => {
-    tasksList = tasksList.filter((task) => !task.completed);
-    updateList();
+    const filteredTasksList = tasksList.filter((task) => !task.completed);
+    updateList(filteredTasksList);
   });
 };
 
