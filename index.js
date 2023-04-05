@@ -20,28 +20,23 @@ import { byName } from './js/filters.js';
 // Save data to localStorage
 
 const startApp = () => {
-  console.log('Workshop1 startApp');
-
   const tasksList = loadList();
 
   renderList(tasksList);
-
-  const updateList = () => {
-    saveList(tasksList);
-    renderList(tasksList);
-  };
 
   formListener((newTask) => {
     tasksList.push({
       name: newTask,
       completed: false,
     });
-    updateList();
+    saveList(tasksList);
+    renderList(tasksList);
   });
 
   listClickListener((index) => {
     tasksList.splice(index, 1);
-    updateList();
+    saveList(tasksList);
+    renderList(tasksList);
   });
 
   formChangeListener((text) => {
