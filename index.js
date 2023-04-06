@@ -28,14 +28,14 @@ const startApp = () => {
   listClickListener((id, action) => {
     if (action === 'remove') {
       tasksList = tasksList.filter((task) => task.id !== id);
-      updateList();
     }
 
     if (action === 'check') {
       const clickedTask = tasksList.find((task) => task.id === id);
       clickedTask.completed = !clickedTask.completed;
-      updateList();
     }
+
+    updateList();
   });
 
   formChangeListener((text) => {
