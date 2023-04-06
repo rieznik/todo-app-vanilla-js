@@ -7,13 +7,13 @@ import { removeCompletedListener } from './js/removeCompletedListener.js';
 import { byName } from './js/filters.js';
 
 const startApp = () => {
-  const tasksList = loadList();
+  let tasksList = loadList();
 
   renderList(tasksList);
 
-  const updateList = (list) => {
-    saveList(list);
-    renderList(list);
+  const updateList = () => {
+    saveList(tasksList);
+    renderList(tasksList);
   };
 
   formListener((newTask) => {
@@ -22,19 +22,19 @@ const startApp = () => {
       name: newTask,
       completed: false,
     });
-    updateList(tasksList);
+    updateList();
   });
 
   listClickListener((id, action) => {
     if (action === 'remove') {
-      const filteredTasksList = tasksList.filter((task) => task.id !== id);
-      updateList(filteredTasksList);
+      tasksList = tasksList.filter((task) => task.id !== id);
+      updateList();
     }
 
     if (action === 'check') {
       const clickedTask = tasksList.find((task) => task.id === id);
       clickedTask.completed = !clickedTask.completed;
-      updateList(tasksList);
+      updateList();
     }
   });
 
@@ -44,8 +44,8 @@ const startApp = () => {
   });
 
   removeCompletedListener(() => {
-    const filteredTasksList = tasksList.filter((task) => !task.completed);
-    updateList(filteredTasksList);
+    tasksList = tasksList.filter((task) => !task.completed);
+    updateList();
   });
 };
 
